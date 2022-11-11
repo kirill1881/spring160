@@ -1,5 +1,6 @@
 package com.example.spring160.models;
 
+import com.example.spring160.models.enums.Type;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,4 +27,8 @@ public class ItemModel {
 
     @Column(name = "ph_url")
     private String url;
+
+    @Enumerated
+    @Column(name = "item_type")
+    private Type type;
 }

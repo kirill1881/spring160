@@ -1,6 +1,7 @@
 package com.example.spring160.controllers;
 
 import com.example.spring160.models.ItemModel;
+import com.example.spring160.models.enums.Type;
 import com.example.spring160.repos.ItemRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,8 @@ public class AddItemController {
                                 @RequestParam String disc,
                                 @RequestParam int price,
                                 @RequestParam int weight,
-                                @RequestParam String url){
+                                @RequestParam String url,
+                                @RequestParam String type){
 
         ItemModel itemModel = new ItemModel();
         itemModel.setName(name);
@@ -36,7 +38,23 @@ public class AddItemController {
         itemModel.setPrice(price);
         itemModel.setUrl(url);
         itemModel.setWeight(weight);
-
+        switch (type){
+            case "Елка":
+                itemModel.setType(Type.CHRISTMAS_TREES);
+                break;
+            case "Игрушка":
+                itemModel.setType(Type.TOYS);
+                break;
+            case "Украшение":
+                itemModel.setType(Type.DECORATIONS);
+                break;
+            case "Гирлянда":
+                itemModel.setType(Type.LIGHTS);
+                break;
+            case "Подарок":
+                itemModel.setType(Type.PRESENTS);
+                break;
+        }
         itemRepo.save(itemModel);
         return new RedirectView("/");
     }
