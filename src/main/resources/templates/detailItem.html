@@ -119,7 +119,15 @@
 <p th:text="${model.getDisc()}"></p>
 <h4 th:text="${model.getPrice()}"></h4>
 <p th:text="${model.getWeight()}"></p>
-
+<p th:text="${model.getUsdPrice()}"></p>
+<p th:text="${model.getEurPrice()}"></p>
+<br>
+<br>
+<form method="post" th:action="'/request/'+${model.getId()}">
+    <input type="text" name="name" placeholder="Введите имя "><br>
+    <input type="text" name="contact" placeholder="Оставте свой контакт"><br>
+    <button type="submit">Оставить заявку</button>
+</form>
 <footer class="text-muted py-5">
     <div class="container">
         <p class="float-end mb-1">

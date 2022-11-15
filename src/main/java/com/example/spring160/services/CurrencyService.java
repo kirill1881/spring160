@@ -1,6 +1,5 @@
 package com.example.spring160.services;
 
-import netscape.javascript.JSObject;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class CurrencyService {
         );
         JSONObject jsonObject = new JSONObject(bufferedReader.readLine());
         double course =
-                Double.parseDouble(jsonObject.getString("Cur_OfficialRate").toString());
+                Double.parseDouble(jsonObject.get("Cur_OfficialRate").toString());
         usdPrice = bynPrice/course;
         return usdPrice;
     }
@@ -32,7 +31,7 @@ public class CurrencyService {
         );
         JSONObject jsonObject = new JSONObject(bufferedReader.readLine());
         double course =
-                Double.parseDouble(jsonObject.getString("Cur_OfficialRate").toString());
+                Double.parseDouble(jsonObject.get("Cur_OfficialRate").toString());
         eurPrice = bynPrice/course;
         return eurPrice;
     }

@@ -3,6 +3,7 @@ package com.example.spring160.controllers;
 import com.example.spring160.models.ItemModel;
 import com.example.spring160.models.enums.Type;
 import com.example.spring160.repos.ItemRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ public class AddItemController {
     public String getAddPage(){
         return "addItem";
     }
+
     @PostMapping
     public RedirectView setData(@RequestParam String name,
                                 @RequestParam String disc,
