@@ -27,4 +27,8 @@ public class FirebaseImageService {
         storage.create(blobInfo, multipartFile.getInputStream());
         return imageName;
     }
+    public String getPhotoUrl(String name){
+        return "https://firebasestorage.googleapis.com/v0/b/spring160-ebd2f.appspot.com/o/"+name+"?alt=media&token=20589560-b23b-457a-b443-16dd816f0e9b";
+
+    }
 }

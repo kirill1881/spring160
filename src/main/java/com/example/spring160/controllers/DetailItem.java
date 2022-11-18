@@ -4,6 +4,8 @@ import com.example.spring160.models.ItemModel;
 import com.example.spring160.models.helpers.BufferItem;
 import com.example.spring160.repos.ItemRepo;
 import com.example.spring160.services.CurrencyService;
+import com.example.spring160.services.FirebaseImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +18,13 @@ public class DetailItem {
     private final ItemRepo itemRepo;
     private final CurrencyService currencyService;
 
+    @Autowired
+    private FirebaseImageService firebaseImageService;
+
     public DetailItem(ItemRepo itemRepo, CurrencyService currencyService) {
         this.itemRepo = itemRepo;
         this.currencyService = currencyService;
+
     }
 
     @GetMapping("/{id}")
@@ -26,6 +32,7 @@ public class DetailItem {
                                 Model model){
         ItemModel itemModel = itemRepo.findItemModelById(id);
         BufferItem bufferItem = new BufferItem(itemModel);
+        bufferItem.setUrl(firebaseImageService.getPhotoUrl(bufferItem.getUrl()));
         try {
             bufferItem.setEurPrice(round(currencyService.getEurPrice(itemModel.getPrice()), 2)+" eur");
             bufferItem.setUsdPrice(round(currencyService.getUsdPrice(itemModel.getPrice()), 2)+" usd");

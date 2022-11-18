@@ -3,12 +3,13 @@ package com.example.spring160.controllers;
 import com.example.spring160.models.ItemModel;
 import com.example.spring160.models.enums.Type;
 import com.example.spring160.repos.ItemRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.spring160.services.FirebaseImageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -16,9 +17,11 @@ import org.springframework.web.servlet.view.RedirectView;
 public class AddItemController {
 
     private final ItemRepo itemRepo;
+    private final FirebaseImageService firebaseImageService;
 
-    public AddItemController(ItemRepo itemRepo) {
+    public AddItemController(ItemRepo itemRepo, FirebaseImageService firebaseImageService) {
         this.itemRepo = itemRepo;
+        this.firebaseImageService = firebaseImageService;
     }
 
     @GetMapping
@@ -31,14 +34,15 @@ public class AddItemController {
                                 @RequestParam String disc,
                                 @RequestParam int price,
                                 @RequestParam int weight,
-                                @RequestParam String url,
-                                @RequestParam String type){
+                                @RequestParam MultipartFile url,
+                                @RequestParam String type) throws Exception {
 
         ItemModel itemModel = new ItemModel();
         itemModel.setName(name);
         itemModel.setDisc(disc);
         itemModel.setPrice(price);
-        itemModel.setUrl(url);
+        String fileName = firebaseImageService.save(url);
+        itemModel.setUrl(fileName);
         itemModel.setWeight(weight);
         switch (type){
             case "Елка":
