@@ -13,11 +13,14 @@ public class PurchaseRequest {
     private long id;
 
     @Column(name = "first_name")
-    private String first_name;
+    private String firstName;
 
     @Column(name = "contact")
     private String contact;
 
     @Column(name = "Id_product")
     private long idProduct;
+
+    @Column(name = "if_worked")
+    private Boolean ifWorked;
 }

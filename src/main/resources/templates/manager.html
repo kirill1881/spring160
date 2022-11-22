@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="r:${requests}">
+    <h3 th:text="${r.getFirstName()}"></h3>
+    <h3 th:text="${r.getContact()}"></h3>
+    <h3 th:text="${r.getIdProduct()}"></h3>
+    <a th:href="'/manager/worked/'+${r.getId()}">Заявка обработана</a>
+</div>
+</body>
+</html>

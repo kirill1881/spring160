@@ -25,8 +25,9 @@ public class RequestController {
                                     @RequestParam String contact){
         PurchaseRequest purchaseRequest = new PurchaseRequest();
         purchaseRequest.setContact(contact);
-        purchaseRequest.setFirst_name(name);
+        purchaseRequest.setFirstName(name);
         purchaseRequest.setIdProduct(id);
+        purchaseRequest.setIfWorked(false);
 
         purchaseRepo.save(purchaseRequest);
         return new RedirectView("/items");
